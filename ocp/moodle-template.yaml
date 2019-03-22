@@ -26,7 +26,6 @@ objects:
     labels:
       app: moodle
       template: moodle
-      template: moodle
     name: moodle-db-secret
   type: Opaque
   stringData:
