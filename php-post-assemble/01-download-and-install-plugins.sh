@@ -8,3 +8,8 @@ rm local_kopere_dashboard_moodle36_2019031900.zip
 wget https://moodle.org/plugins/download.php/18884/theme_adaptable_moodle36_2019011701.zip
 unzip theme_adaptable_moodle36_2019011701.zip -d $APP_DATA/theme
 rm theme_adaptable_moodle36_2019011701.zip
+
+wget https://github.com/wet-boew/wet-boew-moodle/archive/master.zip
+unzip master.zip -d $APP_DATA/theme
+rm master.zip
+

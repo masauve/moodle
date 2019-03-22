@@ -38,32 +38,32 @@ $CFG = new stdClass();
 // will be stored.  This database must already have been created         //
 // and a username/password created to access it.                         //
 
-$CFG->dbtype    = 'pgsql';      // 'pgsql', 'mariadb', 'mysqli', 'sqlsrv' or 'oci'
-$CFG->dblibrary = 'native';     // 'native' only at the moment
+$CFG->dbtype    = $_ENV["DB_TYPE"];      // 'pgsql', 'mariadb', 'mysqli', 'sqlsrv' or 'oci'
+$CFG->dblibrary = $_ENV["DB_LIBRARY"];     // 'native' only at the moment
 $CFG->dbhost    = $_ENV["DB_HOST"];  // eg 'localhost' or 'db.isp.com' or IP
 $CFG->dbname    = $_ENV["DB_NAME"];     // database name, eg moodle
 $CFG->dbuser    = $_ENV["DB_USERNAME"];   // your database username
 $CFG->dbpass    = $_ENV["DB_PASSWORD"];   // your database password
-$CFG->prefix    = 'mdl_';       // prefix to use for all table names
+$CFG->prefix    = $_ENV["DB_TBL_PREFIX"];       // prefix to use for all table names
 $CFG->dboptions = array(
-    'dbpersist' => false,       // should persistent database connections be
+    'dbpersist' => $_ENV["DB_PERSIST"],       // should persistent database connections be
                                 //  used? set to 'false' for the most stable
                                 //  setting, 'true' can improve performance
                                 //  sometimes
-    'dbsocket'  => false,       // should connection via UNIX socket be used?
+    'dbsocket'  => $_ENV["DB_SOCKET"],       // should connection via UNIX socket be used?
                                 //  if you set it to 'true' or custom path
                                 //  here set dbhost to 'localhost',
                                 //  (please note mysql is always using socket
                                 //  if dbhost is 'localhost' - if you need
                                 //  local port connection use '127.0.0.1')
-    'dbport'    => '',          // the TCP port number to use when connecting
+    'dbport'    => $_ENV["DB_PORT"],          // the TCP port number to use when connecting
                                 //  to the server. keep empty string for the
                                 //  default port
-    'dbhandlesoptions' => false,// On PostgreSQL poolers like pgbouncer don't
+    'dbhandlesoptions' => $_ENV["DB_HANDLES_OPTIONS"],// On PostgreSQL poolers like pgbouncer don't
                                 // support advanced options on connection.
                                 // If you set those in the database then
                                 // the advanced settings will not be sent.
-    'dbcollation' => 'utf8mb4_unicode_ci', // MySQL has partial and full UTF-8
+    'dbcollation' => $_ENV["DB_COLLATION"], // MySQL has partial and full UTF-8
                                 // support. If you wish to use partial UTF-8
                                 // (three bytes) then set this option to
                                 // 'utf8_unicode_ci', otherwise this option
@@ -123,7 +123,7 @@ $CFG->dataroot  = $_ENV["MOODLE_DATA_DIR"];
 // to make sure the web server process (eg Apache) can access the files.
 // NOTE: the prefixed 0 is important, and don't use quotes.
 
-$CFG->directorypermissions = 02777;
+$CFG->directorypermissions = $_ENV["MOODLE_DATA_DIR_PERMISSIONS"];
 
 
 //=========================================================================
@@ -137,7 +137,7 @@ $CFG->directorypermissions = 02777;
 // After any change you need to visit your new admin directory
 // and purge all caches.
 
-$CFG->admin = 'admin';
+$CFG->admin = $_ENV["MOODLE_ADMIN_DIR"];
 
 
 //=========================================================================
