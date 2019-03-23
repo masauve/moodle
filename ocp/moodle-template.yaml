@@ -71,7 +71,6 @@ objects:
           envFrom: 
             - configMapRef:
                 name: moodle-config
-          envFrom: 
             - secretRef:
                 name: moodle-db-secret
           imagePullPolicy: Always
