@@ -29,9 +29,9 @@ objects:
     name: moodle-db-secret
   type: Opaque
   stringData:
-    database-name: "${DB_NAME}"
-    database-password: "${DB_PASSWORD}"
-    database-user: "${DB_USERNAME}"
+    DB_NAME: "${DB_NAME}"
+    DB_PASSWORD: "${DB_PASSWORD}"
+    DB_USERNAME: "${DB_USERNAME}"
 - apiVersion: v1
   kind: ConfigMap
   metadata:
@@ -43,15 +43,6 @@ objects:
     MOODLE_URL: "http://${MOODLE_URL}"
     MOODLE_DATA_DIR: "${MOODLE_DATA_DIR}"
     DB_HOST: "${DB_HOST}"
-    DB_TYPE: "pgsql"
-    DB_LIBRARY: "native"
-    DB_TBL_PREFIX: "mdl_"
-    DB_PERSIST: "false"
-    DB_SOCKET: "false"
-    DB_PORT: "5432"
-    DB_HANDLES_OPTIONS: "false"
-    DB_COLLATION: "utf8mb4_unicode_ci"
-    MOODLE_DATA_DIR_PERMISSIONS: "02777"
     MOODLE_ADMIN_DIR: "admin"
 - apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
@@ -77,25 +68,12 @@ objects:
       spec:
         containers:
         - name: moodle
-          env:
-            - name: DB_NAME
-              valueFrom:
-                secretKeyRef:
-                  key: database-name
-                  name: moodle-db-secret
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  key: database-user
-                  name: moodle-db-secret
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: database-password
-                  name: moodle-db-secret
           envFrom: 
             - configMapRef:
                 name: moodle-config
+          envFrom: 
+            - secretRef:
+                name: moodle-db-secret
           imagePullPolicy: Always
           ports:
           - containerPort: 8080
@@ -174,12 +152,12 @@ parameters:
   required: true
   value: "moodle-test.192.168.64.6.nip.io"
 - description: The Moodle data directory (for the persistent volume).
-  displayName: Moodle data directory
+  displayName: Moodle Data Directory
   name: MOODLE_DATA_DIR
   required: true
   value: "/data/moodle"
 - description: Amount of storage for the data directory (e.g. 5Gi).
-  displayName: Data Dir Size
+  displayName: Data Directory Size
   name: DATA_DIR_SIZE
   value: "2Gi"
 - description: The OpenShift Namespace where the Moodle ImageStream resides.
@@ -187,7 +165,7 @@ parameters:
   name: NAMESPACE
   value: "moodle"
 - description: Database host (service name if on OCP).
-  displayName: Database HOST
+  displayName: Database Host
   name: DB_HOST
   required: true
 - description: Database name.

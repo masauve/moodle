@@ -40,10 +40,10 @@ $CFG = new stdClass();
 
 $CFG->dbtype    = 'pgsql';      // 'pgsql', 'mariadb', 'mysqli', 'sqlsrv' or 'oci'
 $CFG->dblibrary = 'native';     // 'native' only at the moment
-$CFG->dbhost    = 'moodledb';  // eg 'localhost' or 'db.isp.com' or IP
-$CFG->dbname    = 'moodle';     // database name, eg moodle
-$CFG->dbuser    = 'moodle';   // your database username
-$CFG->dbpass    = 'moodle';   // your database password
+$CFG->dbhost    = $_ENV["DB_HOST"];  // eg 'localhost' or 'db.isp.com' or IP
+$CFG->dbname    = $_ENV["DB_NAME"];     // database name, eg moodle
+$CFG->dbuser    = $_ENV["DB_USERNAME"];   // your database username
+$CFG->dbpass    = $_ENV["DB_PASSWORD"];   // your database password
 $CFG->prefix    = 'mdl_';       // prefix to use for all table names
 $CFG->dboptions = array(
     'dbpersist' => false,       // should persistent database connections be
@@ -93,7 +93,7 @@ $CFG->dboptions = array(
 // If you need both intranet and Internet access please read
 // http://docs.moodle.org/en/masquerading
 
-$CFG->wwwroot   = 'http://moodle.192.168.64.7.nip.io';
+$CFG->wwwroot   = $_ENV["MOODLE_URL"];
 
 
 //=========================================================================
@@ -109,7 +109,7 @@ $CFG->wwwroot   = 'http://moodle.192.168.64.7.nip.io';
 //
 // - On Windows systems you might specify something like 'c:\moodledata'
 
-$CFG->dataroot  = '/data/moodle';
+$CFG->dataroot  = $_ENV["MOODLE_DATA_DIR"];
 
 
 //=========================================================================
