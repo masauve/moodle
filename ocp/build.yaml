@@ -46,10 +46,6 @@ objects:
     labels:
       app: moodle
     name: moodle
-  spec:
-    lookupPolicy:
-      local: false
-    tags: {}
 parameters:
 - description: Moodle repository URL.
   displayName: Moodle Repo URL
