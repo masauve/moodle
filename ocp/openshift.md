@@ -33,7 +33,12 @@ Now, if you go to `Builds -> Builds`, you should see a Moodle build that is in p
 
 ### Command Line
 
-Coming soon!
+```
+$ oc process -f https://raw.githubusercontent.com/pittar/moodle/MOODLE_36_STABLE/ocp/build.yaml \
+    -p GIT_URL="https://github.com/pittar/moodle" \
+    -p GIT_REF="MOODLE_36_STABLE" \
+    | oc create -f -
+```
 
 ## Launch Moodle
 
@@ -55,7 +60,18 @@ Finish the install process, and you're ready to go.
 
 ## Command Line
 
-Coming soon!
+```
+$ oc process -f https://raw.githubusercontent.com/pittar/moodle/MOODLE_36_STABLE/ocp/moodle-template.yaml \
+    -p MOODLE_URL="moodle.192.168.64.7.nip.io" \
+    -p MOODLE_DATA_DIR="/data/moodle" \
+    -p DATA_DIR_SIZE="2Gi" \
+    -p NAMESPACE="moodle" \
+    -p DB_HOST="moodledb" \
+    -p DB_NAME="moodle" \
+    -p DB_USERNAME="moodle" \
+    -p DB_PASSWORD="moodle" \
+    | oc create -f -
+```
 
 ## Conclusion
 
