@@ -29,6 +29,7 @@ objects:
     name: moodle-db-secret
   type: Opaque
   stringData:
+    DB_HOST: "${DB_HOST}"
     DB_NAME: "${DB_NAME}"
     DB_PASSWORD: "${DB_PASSWORD}"
     DB_USERNAME: "${DB_USERNAME}"
@@ -42,7 +43,6 @@ objects:
   data:
     MOODLE_URL: "http://${MOODLE_URL}"
     MOODLE_DATA_DIR: "${MOODLE_DATA_DIR}"
-    DB_HOST: "${DB_HOST}"
     MOODLE_ADMIN_DIR: "admin"
 - apiVersion: apps.openshift.io/v1
   kind: DeploymentConfig
